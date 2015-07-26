@@ -1,5 +1,11 @@
-permute.columns <- function(X){
-  apply(X,2,function(x)sample(x))
+### randomly permute rows in slices of the 3rd dim
+permute.columns <- function(X,dim3,n){
+  temp=cbind(as.vector(X[,,1]),
+             sapply(2:dim3, function(i)
+               X[sample(n),,i])
+  )
+  temp=array(temp,dim(X))
+  temp
 }
 
 
