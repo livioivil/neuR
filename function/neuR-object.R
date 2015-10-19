@@ -35,8 +35,6 @@ setMethod("summary", "neuR.object", function(object)
 
 
 
-
-
 # ==========================================================
 # setGeneric("dim", function(object, ...) standardGeneric("dim"))
 setMethod("dim", "neuR.object",
