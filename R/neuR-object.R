@@ -1,3 +1,10 @@
+#' An S4 class to store fNIRS, fMRI, EEG data
+#'
+#' @slot data list of 3D arrays
+#' @slot mask 
+#' @slot info 
+#'
+
 #==========================================================
 # CLASS DEFINITION *** CLASS DEFINITION *** CLASS DEFINITION
 #==========================================================

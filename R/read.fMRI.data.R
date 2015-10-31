@@ -1,6 +1,16 @@
-require('AnalyzeFMRI')
-### leggi imgs da una directory
-read.img.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask=NULL,
+#' @name read.fMRI.data
+#' @title Reads .nii and .img/.hdr file data and save to neuR-object
+#'
+#' @description Reads .nii and .img/.hdr file data and save to neuR-object
+#' @param path "."
+#' @param pattern "s.*\\.img"
+#' @param files NULL
+#' @param mask NULL
+#' @param info NULL
+#' @return a neuR-object
+#' @export
+
+read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask=NULL,
                           info=NULL){
   
   if(is.null(files))  {
@@ -10,11 +20,16 @@ read.img.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask=NULL,
   }
   cat("\n reading:",files[1]," ..")
   n=nchar(files[1])
-  if(substr(files[1],n-2,n)=="nii")
-    f.read.vol=f.read.nifti.volume else
+  if(substr(files[1],n-2,n)=="nii"){
+    f.read.vol=f.read.nifti.volume
+    f.read.head=f.read.nifti.header
+    } else{
       f.read.vol=f.read.analyze.volume
+      f.read.head=f.read.analyze.header
+    }
   
   tt=f.read.vol(files[1])
+  tt.head=f.read.head(files[1])
   nfiles=length(files)
   TT=array(NA,c(dim(tt)[1:3],nfiles))
   TT[,,,1]=tt
@@ -53,6 +68,7 @@ read.img.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask=NULL,
   info$dim.vol=dim(mask)
   info$ntimes=nrow(tcs)
   info$nvoxels=sum(!is.na(mask))
+  info$header=tt.head
 
   res <- new("neuR.object") 
   res@data$tcs=tcs

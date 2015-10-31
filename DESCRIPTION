@@ -1,0 +1,9 @@
+Package: neuR
+Version: 0.1
+Date: 2015-10-31
+Title: R package for neuroscience data processing and statistical analysis of neuro-data
+Author: Livio Finos, Alessandro Rigon, Silvia Palmieri, Marco Zanetti, Santiago Liebrecht
+Maintainer: livio finos <livio.finos@unipd.it>
+Description: R package for neuroscience data processing and statistical analysis of neuro-data
+License: GPL (>= 2)
+RoxygenNote: 5.0.0
