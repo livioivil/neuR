@@ -1,4 +1,17 @@
-### come extract.block.pc, ma sui dati D
+#' @name compute.pcs
+#' @title Computes principal components for each voxel/channel of a neuR-object
+#'
+#' @description Computes principal components for each voxel/channel stored in tcs array of slot data of a neuR-object (i.e. D@data$tcs)
+#' @param D a neuR-ogject
+#' @param center TRUE 
+#' @param scale FALSE
+#' @param max.pc.num 1
+#' @param drop.tcs TRUE
+#' @param ... other 
+#' @return a neuR-object
+#' @export
+
+
 compute.pcs <- function(D,center=TRUE,scale=FALSE,
                               max.pc.num=1,drop.tcs=TRUE,...){
   #estraggo al max max.pc.num comp principali. meno sono pi? veloce ? algoritmo.
@@ -54,6 +67,6 @@ compute.pcs <- function(D,center=TRUE,scale=FALSE,
   var.tot=sapply(sv.list,function(x) x$var.tot)
   var.tot=array(var.tot,c(1,length(var.tot),1))
   dimnames(var.tot)[[2]]=pcs.col.names
-
+  
   list(pcs=pcs,loadings=loadings,var=var,var.tot=var.tot)
 }

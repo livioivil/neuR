@@ -1,10 +1,19 @@
-## 
-## D,which.maps="tcs",
-## file.root.name="V",
-## file.type="analyze"
-write.volumes <- function(D,which.maps="tcs",
-                          file.root.name="V",
-                          file.type="nifti"){
+#' @name write.volumes
+#' @title writes  .nii and .img/.hdr file file from a neuR-object
+#'
+#' @description writes  .nii and .img/.hdr file file from a neuR-object
+#' @param D neuR-object
+#' @param which.maps "tcs"
+#' @param file.root.name "V"
+#' @param file.type "nifti"
+#' @param into.path "."
+#' @return NULL
+#' @export
+
+write.volumes <- function(D,which.maps = "tcs",
+                          file.root.name = "V",
+                          file.type = "nifti",
+                          into.path = "."){
 
   # generica funzione di scrittura di immagini
   .get.write.function <- function(file.type,D){
@@ -48,11 +57,13 @@ write.volumes <- function(D,which.maps="tcs",
 
   
   f.write.neuR <- .get.write.function(file.type,D)
-  
+  # creates the dir, if needed
+  dir.create(into.path,recursive = TRUE)
   sapply(which.maps,function(map.i){
     .write.( D4=get.neuR.map(D,map.i),
              mask=D@mask,
-             file.name=paste(file.root.name,sep="_",map.i),
+             file.name=paste(into.path, sep="/",
+                             paste(file.root.name,sep="_",map.i)),
              f.write.neuR=f.write.neuR)})
-
+return(NULL)
 }

@@ -5,10 +5,10 @@
   #(centro e) riscalo ma solo se richiesto (pari a cor=TRUE)
   tcblocks=scale(tcblocks,center=center, scale=scale)
   if(any(!is.finite(tcblocks))) {
-    sv$d=rep(NA,max.pc.num)
-    sv$u=matrix(NA,nrow(tcblocks),max.pc.num)
-    sv$v=matrix(NA,ncol(tcblocks),max.pc.num)
-    sv$var.tot=NA    
+    sv=list(d=rep(NA,max.pc.num),
+            u=matrix(NA,nrow(tcblocks),max.pc.num),
+            v=matrix(NA,ncol(tcblocks),max.pc.num),
+            var.tot=NA)    
   } else{
     #estraggo al max max.pc.num comp principali. meno sono pi? veloce ? algoritmo.
     sv=svd(tcblocks,nu=max.pc.num,nv=max.pc.num)

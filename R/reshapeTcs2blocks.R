@@ -1,4 +1,12 @@
-# trasformo D in D3 (time X voxel/channel X block)
+#' @name reshapeTcs2blocks
+#' @title Reshapes D@data$tcs in a 3D (time X voxel/channel X block)
+#'
+#' @description Reshapes D@data$tcs in a 3D (time X voxel/channel X block)
+#' @param D a neuR-ogject
+#' @param blocks if scalar, it is the number of volumes in each blocks
+#' @return a neuR-object
+#' @export
+
 reshapeTcs2blocks <- function(D,blocks){
   if(is.null(blocks)) error("blocks can't be null")
   #if scalar, it is the number of volumes in each blocks

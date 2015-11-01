@@ -10,6 +10,7 @@
 #' @return a neuR-object
 #' @export
 
+
 read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask=NULL,
                           info=NULL){
   
@@ -18,6 +19,7 @@ read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask=NULL,
   } else{
     files=paste(path,files,sep="/")
   }
+  files=gtools::mixedsort(files)
   cat("\n reading:",files[1]," ..")
   n=nchar(files[1])
   if(substr(files[1],n-2,n)=="nii"){

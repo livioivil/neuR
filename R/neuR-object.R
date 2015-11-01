@@ -5,13 +5,6 @@
 #' @slot info 
 #'
 
-#==========================================================
-# CLASS DEFINITION *** CLASS DEFINITION *** CLASS DEFINITION
-#==========================================================
-
-# setClassUnion("arrayOrNULL", c("array", "NULL"))
-# setClassUnion("listOrNULL", c("list", "NULL"))
-
 
 setClass("neuR.object", 
   representation(
@@ -46,7 +39,7 @@ setMethod("summary", "neuR.object", function(object)
 # setGeneric("dim", function(object, ...) standardGeneric("dim"))
 setMethod("dim", "neuR.object",
   function(x) {
-    dim(x@mask)
+    dim(x@info$dim.vol)
   }
 )
 
@@ -60,6 +53,6 @@ setMethod("dim", "neuR.object",
 setMethod("length", "neuR.object", 
             function(x) 
 {
-  nrow(x@data$tcs)
+  x@info$ntimes
 })
 

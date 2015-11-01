@@ -1,6 +1,12 @@
-#map = function to be returned
-#saveMap=FALSE save also the data array? (or just the function)
-#NOT IMPLEMENTED YET: out.funct.name=map the name of the function to be generated (eg different names depending on the parameters)
+#' @name get.neuR.map
+#' @title add funct to neuR-object
+#' @description NOT IMPLEMENTED YET: out.funct.name=map the name of the function to be generated (eg different names depending on the parameters)
+#' @param obj neuR-object
+#' @param map  function to be returned
+#' @param recompute FALSE
+#' @return a volume
+#' @export
+
 get.neuR.map <- function(obj,map,recompute=FALSE,...){
   if(!recompute){
     if(map%in%names(obj@data))
