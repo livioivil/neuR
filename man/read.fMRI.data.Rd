@@ -5,7 +5,7 @@
 \title{Reads .nii and .img/.hdr file data and save to neuR-object}
 \usage{
 read.fMRI.data(path = ".", pattern = "s.*\\\\.img", files = NULL,
-  mask = NULL, info = NULL)
+  mask = NULL, info = NULL, silent = FALSE)
 }
 \arguments{
 \item{path}{"."}
@@ -17,6 +17,8 @@ read.fMRI.data(path = ".", pattern = "s.*\\\\.img", files = NULL,
 \item{mask}{NULL}
 
 \item{info}{NULL}
+
+\item{silent}{FALSE}
 }
 \value{
 a neuR-object

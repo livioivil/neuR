@@ -7,12 +7,13 @@
 #' @param files NULL
 #' @param mask NULL
 #' @param info NULL
+#' @param silent FALSE
 #' @return a neuR-object
 #' @export
 
 
 read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask=NULL,
-                          info=NULL){
+                          info=NULL,silent=FALSE){
   
   if(is.null(files))  {
     files=dir(path,pattern=pattern,full.names =TRUE)
@@ -20,7 +21,7 @@ read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask=NULL,
     files=paste(path,files,sep="/")
   }
   files=gtools::mixedsort(files)
-  cat("\n reading:",files[1]," ..")
+  if(!silent) cat("\n reading:",files[1]," ..")
   n=nchar(files[1])
   if(substr(files[1],n-2,n)=="nii"){
     f.read.vol=f.read.nifti.volume
@@ -37,7 +38,7 @@ read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask=NULL,
   TT[,,,1]=tt
   if( nfiles >1){
     for(i in 2:nfiles){
-      cat("\n reading:",files[i]," ..")
+      if(!silent) cat("\n reading:",files[i]," ..")
       tt=f.read.vol(files[i])
       TT[,,,i]=tt
     }
