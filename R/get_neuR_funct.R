@@ -6,17 +6,28 @@
 #' @return a function
 #' @export
 
-
 get.neuR.funct <- function(funct,...){
   if (length(funct)>1) {
     out=lapply(funct,get.neuR.funct)
     } else
       {  out=switch(funct, 
-                    pcBlocks = compute.pcs, 
-                    irc = compute.irc, 
-                    irh = compute.irh#, 
+                    pcBlocks = {out <- .compute.pcs
+                                environment(out) <- sys.frame(sys.nframe())
+                                environment(out)$X <- D@data$tcs
+                                out}, 
+                    irc = {out <- .compute.irc
+                           environment(out) <- sys.frame(sys.nframe())
+                           environment(out)$var=D@data$var[,,pc.num,drop=FALSE]
+                           environment(out)$var.tot=D@data$var.tot
+                           out}, 
+                    irh = {out <- .compute.irh
+                           environment(out) <- sys.frame(sys.nframe())
+                           environment(out)$loadings=D@data$loadings
+                           out}#, 
 #                 irv = compute.irv, 
 #                 irv.revised = compute.irv.revised
-         )}
+         )  
+      out
+      }
 out
 }

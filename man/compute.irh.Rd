@@ -4,12 +4,14 @@
 \alias{compute.irh}
 \title{Computes IRH (intra run homogeneity) of a neuR-object}
 \usage{
-compute.irh(D, pc.num = 1)
+compute.irh(D, pc.num = 1, drop.tcs = FALSE)
 }
 \arguments{
 \item{D}{a neuR-ogject}
 
 \item{pc.num}{1}
+
+\item{drop.tcs}{FALSE}
 }
 \value{
 a 3D array

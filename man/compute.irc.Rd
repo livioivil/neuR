@@ -4,12 +4,14 @@
 \alias{compute.irc}
 \title{Computes IRC (intra run correlation) of a neuR-object}
 \usage{
-compute.irc(D, pc.num = 1)
+compute.irc(D, pc.num = 1, drop.tcs = FALSE)
 }
 \arguments{
 \item{D}{a neuR-ogject}
 
 \item{pc.num}{1}
+
+\item{drop.tcs}{FALSE}
 }
 \value{
 a 3D array

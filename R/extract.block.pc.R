@@ -3,7 +3,7 @@
                              center=TRUE,scale=TRUE,
                              max.pc.num=1,...){
   #(centro e) riscalo ma solo se richiesto (pari a cor=TRUE)
-  tcblocks=scale(tcblocks,center=center, scale=scale)
+  tcblocks=scale.neuR(tcblocks,center=center, scale=scale)
   if(any(!is.finite(tcblocks))) {
     sv=list(d=rep(NA,max.pc.num),
             u=matrix(NA,nrow(tcblocks),max.pc.num),

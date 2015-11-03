@@ -5,7 +5,7 @@
 \title{Computes principal components for each voxel/channel of a neuR-object}
 \usage{
 compute.pcs(D, center = TRUE, scale = FALSE, max.pc.num = 1,
-  drop.tcs = TRUE, ...)
+  drop.tcs = TRUE, selected.volumes = NULL, ...)
 }
 \arguments{
 \item{D}{a neuR-ogject}
@@ -17,6 +17,8 @@ compute.pcs(D, center = TRUE, scale = FALSE, max.pc.num = 1,
 \item{max.pc.num}{1}
 
 \item{drop.tcs}{TRUE}
+
+\item{selected.volumes}{NULL or a logical vector of length n (number of volumes per block)}
 
 \item{...}{other}
 }
