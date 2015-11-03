@@ -88,3 +88,18 @@ compute.pcs <- function(D,center=TRUE,scale=FALSE,
   
   list(pcs=pcs,loadings=loadings,var=var,var.tot=var.tot)
 }
+
+#############
+.set.default.params.compute.pcs <- function(out){
+  if(is(environment(out)$X,"neuR.object"))
+    environment(out)$X <- environment(out)$X@data$tcs
+  if(is.null(environment(out)$center))
+    environment(out)$center=TRUE
+  if(is.null(environment(out)$scale))
+    environment(out)$scale=FALSE
+  if(is.null(environment(out)$max.pc.num))
+    environment(out)$max.pc.num=1
+  if(is.null(environment(out)$selected.volumes))
+    environment(out)$selected.volumes=NULL
+  out
+}

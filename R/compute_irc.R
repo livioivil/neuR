@@ -24,3 +24,18 @@ compute.irc <- function(D,pc.num=1,drop.tcs=FALSE){
   irc[is.na(irc)]=0
   list(irc)
 }
+
+.set.default.params.compute.irc <- function(out){
+  if(is.null(environment(out)$pc.num))
+    environment(out)$pc.num=1
+  if(is(environment(out)$var,"neuR.object")){
+    environment(out)$var=D@data$var[,,environment(out)$pc.num,drop=FALSE]
+    environment(out)$var.tot=D@data$var.tot
+  }
+  if(is.null(environment(out)$var))
+    environment(out)$var=D@data$var[,,environment(out)$pc.num,drop=FALSE]
+  if(is.null(environment(out)$var.tot))
+    environment(out)$var.tot=D@data$var.tot
+  
+  out
+}

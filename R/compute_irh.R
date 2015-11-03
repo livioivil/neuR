@@ -37,3 +37,14 @@ compute.irh <- function(D,pc.num=1,drop.tcs=FALSE){
   colnames(irh)=colnames(loadings)
   irh
 }
+
+.set.default.params.compute.irh <- function(out){
+  if(is(environment(out)$loadings,"neuR.object")){
+    environment(out)$loadings=D@data$loadings
+  }
+  if(is.null(environment(out)$var))
+    environment(out)$var.tot=D@data$var.tot
+  if(is.null(environment(out)$pc.num))
+    environment(out)$pc.num=1
+  out
+}

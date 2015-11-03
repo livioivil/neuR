@@ -9,22 +9,22 @@
 get.neuR.funct <- function(funct,...){
   if (length(funct)>1) {
     out=lapply(funct,get.neuR.funct)
-    } else
-      {  out=switch(funct, 
+    } else      {  
+      dotss=pryr::dots(...)
+      dotss=sapply(dotss,eval)
+      
+      out=switch(funct, 
                     pcBlocks = {out <- .compute.pcs
-                                environment(out) <- sys.frame(sys.nframe())
-                                environment(out)$X <- D@data$tcs
-                                if(is.null(environment(out)$selected.volumes))
-                                  environment(out)$selected.volumes=NULL
-                                out}, 
+                                environment(out) <-list2env(dotss)# sys.frame(sys.nframe())
+                                out=.set.default.params.compute.pcs(out)                          
+                                 out}, 
                     irc = {out <- .compute.irc
-                           environment(out) <- sys.frame(sys.nframe())
-                           environment(out)$var=D@data$var[,,pc.num,drop=FALSE]
-                           environment(out)$var.tot=D@data$var.tot
+                           environment(out) <-list2env(dotss)# sys.frame(sys.nframe())
+                           out=.set.default.params.compute.irc(out)                          
                            out}, 
                     irh = {out <- .compute.irh
-                           environment(out) <- sys.frame(sys.nframe())
-                           environment(out)$loadings=D@data$loadings
+                           environment(out) <-list2env(dotss)# sys.frame(sys.nframe())
+                           out=.set.default.params.compute.irh(out)                          
                            out}#, 
 #                 irv = compute.irv, 
 #                 irv.revised = compute.irv.revised
