@@ -20,7 +20,7 @@ compute.irc <- function(D,pc.num=1,drop.tcs=FALSE){
 
 .compute.irc <- function(){
   # estrae la percentuale di var spiegata dalla prima componente (su una singola decomposizione, singolo voxel)
-  irc=var/var.tot
+  irc=var/array(var.tot,dim(var))
   irc[is.na(irc)]=0
   list(irc)
 }
