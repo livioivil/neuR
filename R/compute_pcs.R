@@ -48,7 +48,7 @@ compute.pcs <- function(D,center=TRUE,scale=FALSE,
     pcs=aperm(pcs,c(1,3,2))
     rownames(pcs)=dimnames(sv.list[[1]]$pcs)[[1]]
     colnames(pcs)=pcs.col.names
-    dimnames(pcs)[3]=dimnames(sv.list[[1]]$pcs)[[2]]
+    dimnames(pcs)[[3]]=dimnames(sv.list[[1]]$pcs)[[2]]
     
     pcs
   }
