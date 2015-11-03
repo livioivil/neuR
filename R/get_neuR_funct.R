@@ -10,21 +10,15 @@ get.neuR.funct <- function(funct,...){
   if (length(funct)>1) {
     out=lapply(funct,get.neuR.funct)
     } else      {  
-      dotss=pryr::dots(...)
-      dotss=sapply(dotss,eval)
-      
       out=switch(funct, 
                     pcBlocks = {out <- .compute.pcs
-                                environment(out) <-list2env(dotss)# sys.frame(sys.nframe())
-                                out=.set.default.params.compute.pcs(out)                          
+                                out=.set.default.params.compute.pcs(out,...)                          
                                  out}, 
                     irc = {out <- .compute.irc
-                           environment(out) <-list2env(dotss)# sys.frame(sys.nframe())
-                           out=.set.default.params.compute.irc(out)                          
+                           out=.set.default.params.compute.irc(out,...)                          
                            out}, 
                     irh = {out <- .compute.irh
-                           environment(out) <-list2env(dotss)# sys.frame(sys.nframe())
-                           out=.set.default.params.compute.irh(out)                          
+                           out=.set.default.params.compute.irh(out,...)                          
                            out}#, 
 #                 irv = compute.irv, 
 #                 irv.revised = compute.irv.revised

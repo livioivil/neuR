@@ -25,17 +25,24 @@ compute.irc <- function(D,pc.num=1,drop.tcs=FALSE){
   list(irc)
 }
 
-.set.default.params.compute.irc <- function(out){
-  if(is.null(environment(out)$pc.num))
-    environment(out)$pc.num=1
-  if(is(environment(out)$var,"neuR.object")){
-    environment(out)$var=D@data$var[,,environment(out)$pc.num,drop=FALSE]
-    environment(out)$var.tot=D@data$var.tot
-  }
-  if(is.null(environment(out)$var))
-    environment(out)$var=D@data$var[,,environment(out)$pc.num,drop=FALSE]
-  if(is.null(environment(out)$var.tot))
-    environment(out)$var.tot=D@data$var.tot
+.set.default.params.compute.irc <- function(out,...){
+  dotss=pryr::dots(...)
+  dotss=sapply(dotss,eval)
   
+  if(is.null(dotss$var)&& sum(names(dotss)=="")>0)
+    names(dotss)[which(names(dotss)=="")[1]]="var"
+  
+  if(is.null(dotss$pc.num))
+    dotss$pc.num=1
+  if(is(dotss$var,"neuR.object")){
+    dotss$var=D@data$var[,,dotss$pc.num,drop=FALSE]
+    dotss$var.tot=D@data$var.tot
+  }
+  if(is.null(dotss$var))
+    dotss$var=D@data$var[,,dotss$pc.num,drop=FALSE]
+  if(is.null(dotss$var.tot))
+    dotss$var.tot=D@data$var.tot
+  
+  environment(out) <-list2env(dotss)# sys.frame(sys.nframe())
   out
 }

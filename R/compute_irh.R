@@ -38,13 +38,18 @@ compute.irh <- function(D,pc.num=1,drop.tcs=FALSE){
   irh
 }
 
-.set.default.params.compute.irh <- function(out){
-  if(is(environment(out)$loadings,"neuR.object")){
-    environment(out)$loadings=D@data$loadings
+.set.default.params.compute.irh <- function(out,...){
+  dotss=pryr::dots(...)
+  dotss=sapply(dotss,eval)
+  
+  if(is.null(dotss$loadings)&& sum(names(dotss)=="")>0)
+    names(dotss)[which(names(dotss)=="")[1]]="loadings"
+  if(is(dotss$loadings,"neuR.object")){
+    dotss$loadings=D@data$loadings
   }
-  if(is.null(environment(out)$var))
-    environment(out)$var.tot=D@data$var.tot
-  if(is.null(environment(out)$pc.num))
-    environment(out)$pc.num=1
+  if(is.null(dotss$pc.num))
+    dotss$pc.num=1
+  
+  environment(out) <-list2env(dotss)# sys.frame(sys.nframe())
   out
 }

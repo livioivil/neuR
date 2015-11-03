@@ -31,9 +31,10 @@ compute.pcs <- function(D,center=TRUE,scale=FALSE,
   D
 }
 
+############### core function
 .compute.pcs <- function(){
   pcs.col.names=colnames(X)
-  if(is.null(selected.volumes)) selected.volumes=rep(TRUE,nrow(X))
+  if( !exists("selected.volumes")|| is.null(selected.volumes)) selected.volumes=rep(TRUE,nrow(X))
   sv.list=lapply(1:length(pcs.col.names), function(i) 
   {.extract.block.pc(X[selected.volumes,i,],
                      center=center,scale=scale,max.pc.num=max.pc.num)
@@ -90,16 +91,25 @@ compute.pcs <- function(D,center=TRUE,scale=FALSE,
 }
 
 #############
-.set.default.params.compute.pcs <- function(out){
-  if(is(environment(out)$X,"neuR.object"))
-    environment(out)$X <- environment(out)$X@data$tcs
-  if(is.null(environment(out)$center))
-    environment(out)$center=TRUE
-  if(is.null(environment(out)$scale))
-    environment(out)$scale=FALSE
-  if(is.null(environment(out)$max.pc.num))
-    environment(out)$max.pc.num=1
-  if(is.null(environment(out)$selected.volumes))
-    environment(out)$selected.volumes=NULL
+.set.default.params.compute.pcs <- function(out,...){
+  dotss=pryr::dots(...)
+  dotss=sapply(dotss,eval)
+  
+  if(is.null(dotss$X)&& sum(names(dotss)=="")>0)
+    names(dotss)[which(names(dotss)=="")[1]]="X"
+  
+  
+  if(is(dotss$X,"neuR.object"))
+    dotss$X <- dotss$X@data$tcs
+  if(is.null(dotss$center))
+    dotss$center=TRUE
+  if(is.null(dotss$scale))
+    dotss$scale=FALSE
+  if(is.null(dotss$max.pc.num))
+    dotss$max.pc.num=1
+  if(is.null(dotss$selected.volumes))
+    dotss$selected.volumes=NULL
+  
+  environment(out) <-list2env(dotss)# sys.frame(sys.nframe())
   out
 }
