@@ -13,6 +13,7 @@ To **install** this package (in R):
     # install.packages("devtools") 
     library(devtools)
     install_github("livioivil/neuR")
+    library(neuR)
 
 
 * * *

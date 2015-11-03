@@ -14,7 +14,7 @@ get.neuR.map <- function(obj,map,recompute=FALSE,...){
   }
   #check if it is not a function. if not, try to add it to functs
   if(!(map%in%names(obj@functs))){
-    obj@functs[[map]]= get.neuR.funct(map,obj,...)
+    obj@functs[[map]]= get.neuR.funct(map,...)
   }
   return(obj@functs[[map]]())
 }

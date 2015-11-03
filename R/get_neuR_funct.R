@@ -9,7 +9,7 @@
 get.neuR.funct <- function(funct,...){
   if (length(funct)>1) {
     out=lapply(funct,get.neuR.funct)
-    } else      {  
+    } else      {        
       out=switch(funct, 
                     pcBlocks = {out <- .compute.pcs
                                 out=.set.default.params.compute.pcs(out,...)                          
