@@ -93,7 +93,10 @@ compute.pcs <- function(D,center=TRUE,scale=FALSE,
 #############
 .set.default.params.compute.pcs <- function(out,...){
   dotss=pryr::dots(...)
-  dotss=sapply(dotss,eval)
+  dotss=lapply(dotss,eval)
+  
+  if(is.null(names(dotss)))
+    names(dotss)="X"
   
   if(is.null(dotss$X)&& sum(names(dotss)=="")>0)
     names(dotss)[which(names(dotss)=="")[1]]="X"

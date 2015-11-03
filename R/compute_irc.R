@@ -27,7 +27,10 @@ compute.irc <- function(D,pc.num=1,drop.tcs=FALSE){
 
 .set.default.params.compute.irc <- function(out,...){
   dotss=pryr::dots(...)
-  dotss=sapply(dotss,eval)
+  dotss=lapply(dotss,eval)
+  
+  if(is.null(names(dotss)))
+    names(dotss)="var"
   
   if(is.null(dotss$var)&& sum(names(dotss)=="")>0)
     names(dotss)[which(names(dotss)=="")[1]]="var"

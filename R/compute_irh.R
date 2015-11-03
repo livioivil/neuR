@@ -35,13 +35,16 @@ compute.irh <- function(D,pc.num=1,drop.tcs=FALSE){
   irh=array(irh,c(dim(irh)[1:2],1))
   rownames(irh)=dimnames(loadings)[[3]]
   colnames(irh)=colnames(loadings)
-  irh
+  list(irh)
 }
 
 .set.default.params.compute.irh <- function(out,...){
   dotss=pryr::dots(...)
-  dotss=sapply(dotss,eval)
+  dotss=lapply(dotss,eval)
   
+  if(is.null(names(dotss)))
+    names(dotss)="loadings"
+
   if(is.null(dotss$loadings)&& sum(names(dotss)=="")>0)
     names(dotss)[which(names(dotss)=="")[1]]="loadings"
   if(is(dotss$loadings,"neuR.object")){
