@@ -14,6 +14,8 @@ get.neuR.funct <- function(funct,...){
                     pcBlocks = {out <- .compute.pcs
                                 environment(out) <- sys.frame(sys.nframe())
                                 environment(out)$X <- D@data$tcs
+                                if(is.null(environment(out)$selected.volumes))
+                                  environment(out)$selected.volumes=NULL
                                 out}, 
                     irc = {out <- .compute.irc
                            environment(out) <- sys.frame(sys.nframe())
