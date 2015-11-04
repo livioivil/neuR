@@ -15,9 +15,7 @@ write.volumes <- function(D,which.maps = "tcs",
                           file.type = "nifti",
                           into.path = "."){
   
-  D@data <- .fix.names.neuR.data(D@data)
-  
-  # generica funzione di scrittura di immagini
+ # generica funzione di scrittura di immagini
   .get.write.function <- function(file.type,D){
     if(file.type=="nifti"){
       f= function(data.vol,filename){
@@ -62,7 +60,10 @@ write.volumes <- function(D,which.maps = "tcs",
   # creates the dir, if needed
   dir.create(into.path,recursive = TRUE)
   sapply(which.maps,function(map.i){
-    .write.( D4=get.neuR.map(D,map.i),
+    browser()
+    D4 <- get.neuR.map(D,map.i)
+    D4 <- .fix.names.neuR.data(D4)
+    .write.( D4=D4,
              mask=D@mask,
              file.name=paste(into.path, sep="/",
                              paste(file.root.name,sep="_",map.i)),
