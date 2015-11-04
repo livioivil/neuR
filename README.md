@@ -14,6 +14,9 @@ To **install** this package (in R):
     library(devtools)
     install_github("livioivil/neuR")
     library(neuR)
+    
+    since
 
-
+    library(parallel)
+    options(mc.cores=min(detectCores()-1,30))
 * * *

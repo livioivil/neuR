@@ -35,7 +35,7 @@ compute.pcs <- function(D,center=TRUE,scale=FALSE,
 .compute.pcs <- function(){
   pcs.col.names=colnames(X)
   if( !exists("selected.volumes")|| is.null(selected.volumes)) selected.volumes=rep(TRUE,nrow(X))
-  sv.list=lapply(1:length(pcs.col.names), function(i) 
+  sv.list=mclapply(1:length(pcs.col.names), function(i) 
   {.extract.block.pc(X[selected.volumes,i,],
                      center=center,scale=scale,max.pc.num=max.pc.num)
   })
@@ -55,7 +55,7 @@ compute.pcs <- function(D,center=TRUE,scale=FALSE,
   pcs=.extract.pcs(sv.list)
   
   #rimuovo le pcs dalla lista, per evitare replicati
-  sv.list=lapply(sv.list, function(i) {i$pcs=NULL;i})
+  sv.list=mclapply(sv.list, function(i) {i$pcs=NULL;i})
   #str(sv.list)
   
   ##########  
@@ -69,7 +69,7 @@ compute.pcs <- function(D,center=TRUE,scale=FALSE,
   }
   loadings=.extract.loadings(sv.list)
   #rimuovo le pcs dalla lista, per evitare replicati
-  sv.list=lapply(sv.list, function(i) {i$loadings=NULL;i})
+  sv.list=mclapply(sv.list, function(i) {i$loadings=NULL;i})
   
   ########## 
   .extract.var <- function(sv.list){
@@ -95,7 +95,7 @@ compute.pcs <- function(D,center=TRUE,scale=FALSE,
 #############
 .set.default.params.compute.pcs <- function(out,...){
   dotss=pryr::dots(...)
-  dotss=lapply(dotss,eval)
+  dotss=mclapply(dotss,eval)
   
   if(is.null(names(dotss)))
     names(dotss)="X"

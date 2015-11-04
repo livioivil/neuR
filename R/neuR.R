@@ -7,5 +7,6 @@
 #' @docType package
 #' @name neuR
 #' @import AnalyzeFMRI
+#' @import parallel
 NULL
 #> NULL
