@@ -27,3 +27,16 @@ palette(pal.uno)
   nms
 }
 
+##########
+.fix.names.neuR.data <- function(D3,prefix2ndDim="v",prefix3rdDim="pc"){
+  
+  if(is.list(D3)){
+    lapply(D3,.fix.names.neuR.data)
+  } else{
+  if(is.null(dimnames(D3)[[2]])) 
+    dimnames(D3)[[2]]=paste(prefix2ndDim,sep="",1:ncol(D3))
+  if(is.null(dimnames(D3)[[3]])) 
+  dimnames(D3)[[3]]=paste(prefix3rdDim,sep="",1:dim(D3)[3])
+  }
+  D3
+}

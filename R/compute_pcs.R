@@ -79,6 +79,8 @@ compute.pcs <- function(D,center=TRUE,scale=FALSE,
     colnames(var)=pcs.col.names
     rownames(var)=colnames(sv.list[[1]]$pcs)
     var=aperm(var,c(3,2,1))
+    dimnames(pcs)[[3]]=dimnames(sv.list[[1]]$pcs)[[2]]
+    var
   }
   var=.extract.var(sv.list)
   

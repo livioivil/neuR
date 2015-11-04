@@ -14,7 +14,9 @@ write.volumes <- function(D,which.maps = "tcs",
                           file.root.name = "V",
                           file.type = "nifti",
                           into.path = "."){
-
+  
+  D@data <- .fix.names.neuR.data(D@data)
+  
   # generica funzione di scrittura di immagini
   .get.write.function <- function(file.type,D){
     if(file.type=="nifti"){
