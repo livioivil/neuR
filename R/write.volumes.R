@@ -36,8 +36,8 @@ write.volumes <- function(D,which.maps = "tcs",
   .write. <- function(D4,mask,file.name,f.write.neuR){
     if(is.null(mask)){ #allora ci deve essere almeno dim.vol
       D4=array(D4,c(nrow(D4),dim.vol,dim(D4)[3]))
-      sapply(1:nrow(D4), function(i)
-        sapply(1:dim(D4)[3], function(j){
+      mclapply(1:nrow(D4), function(i)
+        mclapply(1:dim(D4)[3], function(j){
           f.write.neuR(D4[i,,,,j],paste(file.name,i,sep=""))
         })      )
     } else {

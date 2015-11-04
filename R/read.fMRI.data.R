@@ -24,11 +24,11 @@ read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask=NULL,
   if(!silent) cat("\n reading:",files[1]," ..")
   n=nchar(files[1])
   if(substr(files[1],n-2,n)=="nii"){
-    f.read.vol=f.read.nifti.volume
-    f.read.head=f.read.nifti.header
+    f.read.vol=AnalyzeFMRI::f.read.nifti.volume
+    f.read.head=AnalyzeFMRI::f.read.nifti.header
     } else{
-      f.read.vol=f.read.analyze.volume
-      f.read.head=f.read.analyze.header
+      f.read.vol=AnalyzeFMRI::f.read.analyze.volume
+      f.read.head=AnalyzeFMRI::f.read.analyze.header
     }
   
   tt=f.read.vol(files[1])

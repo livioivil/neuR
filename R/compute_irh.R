@@ -41,7 +41,7 @@ compute.irh <- function(D,pc.num=1,drop.tcs=FALSE){
 
 .set.default.params.compute.irh <- function(out,...){
   dotss=pryr::dots(...)
-  dotss=lapply(dotss,eval)
+  dotss=mclapply(dotss,eval)
   
   if(is.null(names(dotss)))
     names(dotss)="loadings"

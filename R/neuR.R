@@ -6,7 +6,7 @@
 #'
 #' @docType package
 #' @name neuR
-#' @import AnalyzeFMRI
 #' @import parallel
 NULL
+options(mc.cores=min(detectCores()-1,30))
 #> NULL
