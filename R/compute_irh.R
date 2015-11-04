@@ -35,7 +35,7 @@ compute.irh <- function(D,pc.num=1,drop.tcs=FALSE){
   irh=array(irh,c(dim(irh)[1:2],1))
   rownames(irh)=dimnames(loadings)[[3]]
   colnames(irh)=colnames(loadings)
-  irh=aperm(array(irh,c(dim(irh),1)),c(3,2,1))
+  irh=aperm(irh,c(3,2,1))
   list(irh)
 }
 
