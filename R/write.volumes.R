@@ -60,7 +60,6 @@ write.volumes <- function(D,which.maps = "tcs",
   # creates the dir, if needed
   dir.create(into.path,recursive = TRUE)
   sapply(which.maps,function(map.i){
-    browser()
     D4 <- get.neuR.map(D,map.i)
     D4 <- .fix.names.neuR.data(D4)
     .write.( D4=D4,
