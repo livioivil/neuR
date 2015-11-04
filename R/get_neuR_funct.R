@@ -19,7 +19,10 @@ get.neuR.funct <- function(funct,...){
                            out}, 
                     irh = {out <- .compute.irh
                            out=.set.default.params.compute.irh(out,...)                          
-                           out}#, 
+                           out},
+                    test = {out <- .compute.test
+                             out=.set.default.params.compute.test(out,...)                          
+                             out}
 #                 irv = compute.irv, 
 #                 irv.revised = compute.irv.revised
          )  

@@ -2,7 +2,7 @@
 #' @title Computes IRC (intra run correlation) of a neuR-object
 #'
 #' @description Computes IRC (intra run correlation) of a neuR-object pcs array of slot data of a neuR-object (i.e. D@data$pcs)
-#' @param D a neuR-ogject
+#' @param D a neuR-object
 #' @param pc.num 1  
 #' @param drop.tcs FALSE
 #' @return a 3D array

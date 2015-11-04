@@ -8,7 +8,7 @@ compute.pcs(D, center = TRUE, scale = FALSE, max.pc.num = 1,
   drop.tcs = TRUE, selected.volumes = NULL, ...)
 }
 \arguments{
-\item{D}{a neuR-ogject}
+\item{D}{a neuR-object}
 
 \item{center}{TRUE}
 

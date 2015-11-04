@@ -7,7 +7,7 @@
 compute.irc(D, pc.num = 1, drop.tcs = FALSE)
 }
 \arguments{
-\item{D}{a neuR-ogject}
+\item{D}{a neuR-object}
 
 \item{pc.num}{1}
 

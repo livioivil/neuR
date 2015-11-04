@@ -16,7 +16,7 @@ get.neuR.map(obj, map, recompute = FALSE, ...)
 
 \item{obj}{neuR-object}
 
-\item{map}{function to be returned}
+\item{map}{function name to be returned or the array itself}
 
 \item{recompute}{FALSE}
 }

@@ -2,7 +2,7 @@
 #' @title Computes principal components for each voxel/channel of a neuR-object
 #'
 #' @description Computes principal components for each voxel/channel stored in tcs array of slot data of a neuR-object (i.e. D@data$tcs)
-#' @param D a neuR-ogject
+#' @param D a neuR-object
 #' @param center TRUE 
 #' @param scale FALSE
 #' @param max.pc.num 1

@@ -8,7 +8,7 @@
 #' l'indice è pari a media(loadings)^2*k.
 #' se 1 tutti i loading sono uguali tra loro (e pari a 1/sqrt(k))
 #' se 0, i loadings hanno media 0 e la varianza vale 1/k
-#' @param D a neuR-ogject
+#' @param D a neuR-object
 #' @param pc.num 1  
 #' @param drop.tcs FALSE
 #' @return a 3D array
