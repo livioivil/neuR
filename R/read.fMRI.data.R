@@ -8,12 +8,13 @@
 #' @param mask NULL
 #' @param info NULL
 #' @param silent FALSE
+#' @param exclude.files vector of ids of files to exclude
 #' @return a neuR-object
 #' @export
 
 
 read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask=NULL,
-                          info=NULL,silent=FALSE){
+                          info=NULL,silent=FALSE,exclude.files=c()){
   
   if(is.null(files))  {
     files=dir(path,pattern=pattern,full.names =TRUE)
@@ -21,6 +22,8 @@ read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask=NULL,
     files=paste(path,files,sep="/")
   }
   files=gtools::mixedsort(files)
+  if(!is.null(exclude.files)&&length(exclude.files)>0)
+    files=files[-exclude.files]
   if(!silent) cat("\n reading:",files[1]," ..")
   n=nchar(files[1])
   if(substr(files[1],n-2,n)=="nii"){
