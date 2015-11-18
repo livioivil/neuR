@@ -19,12 +19,12 @@ write.volumes <- function(D,which.maps = "tcs",
   .get.write.function <- function(file.type,D){
     if(file.type=="nifti"){
       f= function(data.vol,filename){
-        f.write.nifti(data.vol,filename,
+        AnalyzeFMRI::f.write.nifti(data.vol,filename,
                       L = D@info$header,nii = TRUE)
       }
       } else if(file.type=="analyze") {
         f= function(data.vol,filename){
-          f.write.analyze(data.vol,filename,size="float")
+          AnalyzeFMRI::f.write.analyze(data.vol,filename,size="float")
       }
       } else {
         warning("Unknown file.type",call. = TRUE)

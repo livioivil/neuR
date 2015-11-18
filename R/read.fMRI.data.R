@@ -5,7 +5,8 @@
 #' @param path "."
 #' @param pattern "s.*\\.img"
 #' @param files NULL
-#' @param mask NULL
+#' @param mask a file name, a array, equal to 'constant' (look for non constant voxels) 
+#' or a scalar (values equal to this number are out of the brain) 
 #' @param info NULL
 #' @param silent FALSE
 #' @param exclude.files vector of ids of files to exclude
@@ -13,7 +14,7 @@
 #' @export
 
 
-read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask=NULL,
+read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask='constant',
                           info=NULL,silent=FALSE,exclude.files=c()){
   
   if(is.null(files))  {
@@ -47,11 +48,23 @@ read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask=NULL,
     }
   }
   
-  if(is.null(mask)) # try to detect automatically: (zero-constant)
-    mask=apply(TT,1:3,function(x)length(unique(x))>1)*1 else
-      if(is.character(mask)) #if it is a file name, read it:
+  if(is.character(mask)){
+    if(mask=='constant'){
+      # try to detect automatically: (non-constant)  
+      if(nfiles>1) {
+        mask=apply(TT,1:3,function(x)length(unique(x))>1)*1
+      } else 
+        warning("There is only one volume, mask can not detected for option mask='constant'")
+   } else # it is a file name, read it:
         mask=f.read.vol(mask)
-  # otherwise it is an array.
+  } 
+  if(length(mask)==1) #is a scalar
+    {
+    if(nfiles==1)
+      mask=TT!=mask 
+    else  
+      mask=(apply(TT,1:3,prod)!=mask)*1
+     }# otherwise it is an array.
   # force mask to have the same dims of dim(TT)[1:3]
   mask=array(as.integer(mask),dim(TT)[-4])
   

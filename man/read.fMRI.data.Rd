@@ -5,7 +5,7 @@
 \title{Reads .nii and .img/.hdr file data and save to neuR-object}
 \usage{
 read.fMRI.data(path = ".", pattern = "s.*\\\\.img", files = NULL,
-  mask = NULL, info = NULL, silent = FALSE)
+  mask = NULL, info = NULL, silent = FALSE, exclude.files = c())
 }
 \arguments{
 \item{path}{"."}
@@ -19,6 +19,8 @@ read.fMRI.data(path = ".", pattern = "s.*\\\\.img", files = NULL,
 \item{info}{NULL}
 
 \item{silent}{FALSE}
+
+\item{exclude.files}{vector of ids of files to exclude}
 }
 \value{
 a neuR-object
