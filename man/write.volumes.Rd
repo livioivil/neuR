@@ -4,13 +4,13 @@
 \alias{write.volumes}
 \title{writes  .nii and .img/.hdr file file from a neuR-object}
 \usage{
-write.volumes(D, which.maps = "tcs", file.root.name = "V",
+write.volumes(D, which.maps = NULL, file.root.name = "V",
   file.type = "nifti", into.path = ".")
 }
 \arguments{
 \item{D}{neuR-object}
 
-\item{which.maps}{"tcs"}
+\item{which.maps}{by default: all maps in D}
 
 \item{file.root.name}{"V"}
 
@@ -19,6 +19,6 @@ write.volumes(D, which.maps = "tcs", file.root.name = "V",
 \item{into.path}{"."}
 }
 \description{
-writes  .nii and .img/.hdr file file from a neuR-object
+writes  .nii and .img/.hdr file file from a neuR-object. occhio agli header, per ora file.type pari al formato della immagine che ha generato l'header.
 }
 

@@ -4,14 +4,15 @@
 \alias{add.neuR.map}
 \title{add volume to neuR-object}
 \usage{
-add.neuR.map(obj, map, out.name = map, ...)
+add.neuR.map(obj, map, out.name = NULL, ...)
 }
 \arguments{
 \item{obj}{neuR-object}
 
-\item{map}{function to be returned}
+\item{map}{name of the map (function) to be added. It can also be a list of maps (i.e. 3D arrays)}
 
-\item{out.name}{map by default. name of the map to be added in obj@function$out.name}
+\item{out.name}{equal to map (or names(map) if map is a list) by default. 
+Name of the map to be added to the returned object.}
 }
 \value{
 a neuR-object

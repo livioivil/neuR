@@ -88,8 +88,10 @@ read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask='constan
   info$ntimes=nrow(tcs)
   info$nvoxels=sum(!is.na(mask))
   info$header=tt.head
-
-  res <- new("neuR.object") 
+  info$dimnames=dimnames(tcs)
+  
+  res <- new("neuR.object")
+#   dimnames(tcs)=NULL
   res@data$tcs=tcs
   res@mask=mask
   res@info=info

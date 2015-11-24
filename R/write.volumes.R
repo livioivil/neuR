@@ -1,16 +1,16 @@
 #' @name write.volumes
 #' @title writes  .nii and .img/.hdr file file from a neuR-object
 #'
-#' @description writes  .nii and .img/.hdr file file from a neuR-object
+#' @description writes  .nii and .img/.hdr file file from a neuR-object. occhio agli header, per ora file.type pari al formato della immagine che ha generato l'header.
 #' @param D neuR-object
-#' @param which.maps "tcs"
+#' @param which.maps by default: all maps in D
 #' @param file.root.name "V"
 #' @param file.type "nifti"
 #' @param into.path "."
 #' @return NULL
 #' @export
 
-write.volumes <- function(D,which.maps = "tcs",
+write.volumes <- function(D,which.maps = NULL,
                           file.root.name = "V",
                           file.type = "nifti",
                           into.path = "."){

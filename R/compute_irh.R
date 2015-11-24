@@ -25,7 +25,7 @@ compute.irh <- function(D,pc.num=1,drop.tcs=FALSE){
   environment(out) <- sys.frame(sys.nframe())
   environment(out)$loadings=D@data$loadings
   
-  D@data=c(D@data,irc=out())
+  D=add.neuR.map(D,out(),out.name = "irh")
   if(drop.tcs) D@data$tcs=NULL
   D
 }

@@ -13,7 +13,7 @@ compute.irc <- function(D,pc.num=1,drop.tcs=FALSE){
      environment(out) <- sys.frame(sys.nframe())
      environment(out)$var=D@data$var[,,pc.num,drop=FALSE]
      environment(out)$var.tot=D@data$var.tot
-     D@data=c(D@data,irc=out())
+     D=add.neuR.map(D,out(),out.name = "irc")
      if(drop.tcs) D@data$tcs=NULL
      D
 }

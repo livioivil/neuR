@@ -5,7 +5,7 @@
 \title{Reads .nii and .img/.hdr file data and save to neuR-object}
 \usage{
 read.fMRI.data(path = ".", pattern = "s.*\\\\.img", files = NULL,
-  mask = NULL, info = NULL, silent = FALSE, exclude.files = c())
+  mask = "constant", info = NULL, silent = FALSE, exclude.files = c())
 }
 \arguments{
 \item{path}{"."}
@@ -14,7 +14,8 @@ read.fMRI.data(path = ".", pattern = "s.*\\\\.img", files = NULL,
 
 \item{files}{NULL}
 
-\item{mask}{NULL}
+\item{mask}{a file name, a array, equal to 'constant' (look for non constant voxels) 
+or a scalar (values equal to this number are out of the brain)}
 
 \item{info}{NULL}
 

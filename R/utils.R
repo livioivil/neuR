@@ -2,6 +2,16 @@
 pal.uno=c("#445577","#ffcc00","#00A08A","#FF0000","#45abff")
 palette(pal.uno)
 
+##################
+.check.map<- function(obj,map){
+  checks=sapply(map,function(m)   obj@info$nvoxels!=ncol(m))
+  if(any(checks)) warning("maps: ",paste(names(map)[checks],sep=",")
+                          , " have sizes different from ",paste(dim(obj),collapse="x"))
+  checks=which(names(map)%in%names(obj@data))
+  if(any(checks)) warning("maps: ",paste(names(map)[checks],sep=","), " already exist")
+  map
+}
+
 ####################
 #     reading, check and cleaning the mask file
 .fix.mask<- function(mask,D4=NULL){
@@ -40,3 +50,4 @@ palette(pal.uno)
   }
   D3
 }
+
