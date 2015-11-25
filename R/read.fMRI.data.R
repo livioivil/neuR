@@ -10,12 +10,14 @@
 #' @param info NULL
 #' @param silent FALSE
 #' @param exclude.files vector of ids of files to exclude
+#' @param header.file name of the file from which the head should be read. if NULL (default) the head of the first file (not excluded by exclude.files) is used 
 #' @return a neuR-object
 #' @export
 
 
 read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask='constant',
-                          info=NULL,silent=FALSE,exclude.files=c()){
+                          info=NULL,silent=FALSE,exclude.files=c(),
+                          header.file=NULL){
   
   if(is.null(files))  {
     files=dir(path,pattern=pattern,full.names =TRUE)
@@ -36,7 +38,14 @@ read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask='constan
     }
   
   tt=f.read.vol(files[1])
-  tt.head=f.read.head(files[1])
+  
+  #deals with header
+  if(is.null(header.file)) header.file=files[1]
+  if(is.list(header.file)) {
+    tt.head = header.file
+    header.file = "custom header"
+  } else tt.head=f.read.head(header.file)
+  
   nfiles=length(files)
   TT=array(NA,c(dim(tt)[1:3],nfiles))
   TT[,,,1]=tt
@@ -56,7 +65,11 @@ read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask='constan
       } else 
         warning("There is only one volume, mask can not detected for option mask='constant'")
    } else # it is a file name, read it:
-        mask=f.read.vol(mask)
+     if(substr(mask,n-2,n)=="nii"){
+       mask=AnalyzeFMRI::f.read.nifti.volume(mask)
+     } else{
+       mask=AnalyzeFMRI::f.read.analyze.volume(mask)
+      }
   } 
   if(length(mask)==1) #is a scalar
     {
@@ -88,6 +101,7 @@ read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask='constan
   info$ntimes=nrow(tcs)
   info$nvoxels=sum(!is.na(mask))
   info$header=tt.head
+  info$header.file = header.file
   info$dimnames=dimnames(tcs)
   
   res <- new("neuR.object")

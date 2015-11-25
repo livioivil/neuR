@@ -5,7 +5,8 @@
 \title{Reads .nii and .img/.hdr file data and save to neuR-object}
 \usage{
 read.fMRI.data(path = ".", pattern = "s.*\\\\.img", files = NULL,
-  mask = "constant", info = NULL, silent = FALSE, exclude.files = c())
+  mask = "constant", info = NULL, silent = FALSE, exclude.files = c(),
+  header.file = NULL)
 }
 \arguments{
 \item{path}{"."}
@@ -22,6 +23,8 @@ or a scalar (values equal to this number are out of the brain)}
 \item{silent}{FALSE}
 
 \item{exclude.files}{vector of ids of files to exclude}
+
+\item{header.file}{name of the file from which the head should be read. if NULL (default) the head of the first file (not excluded by exclude.files) is used}
 }
 \value{
 a neuR-object

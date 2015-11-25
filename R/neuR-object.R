@@ -32,9 +32,12 @@ setMethod("summary", "neuR.object", function(object)
 {
   cat("A neuR-object with volumes of size:",dim(object),"(=",prod(dim(object)),"overall)")
   cat("
-It contains the following maps:")
-  if(length(object@data)>0){ 
-    print(t(sapply(object@data,dim)))
+It contains the following maps:
+      ")
+  if(length(object@data)>0){
+    out=t(sapply(object@data,dim))
+    colnames(out)=c("Volumes","Voxels","Blocks")
+    print(out)
   } else
     cat("No maps!")
 

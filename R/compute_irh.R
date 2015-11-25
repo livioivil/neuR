@@ -23,7 +23,7 @@ compute.irh <- function(D,pc.num=1,drop.tcs=FALSE){
   # se 0, i loadings hanno media 0 e la varianza vale 1/k
   out <- .compute.irh
   environment(out) <- sys.frame(sys.nframe())
-  environment(out)$loadings=D@data$loadings
+  environment(out)$loadings=D@data$loadings[,,pc.num,drop=FALSE]
   
   D=add.neuR.map(D,out(),out.name = "irh")
   if(drop.tcs) D@data$tcs=NULL

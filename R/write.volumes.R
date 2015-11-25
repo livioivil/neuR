@@ -24,7 +24,11 @@ write.volumes <- function(D,which.maps = NULL,
       }
       } else if(file.type=="analyze") {
         f= function(data.vol,filename){
-          AnalyzeFMRI::f.write.analyze(data.vol,filename,size="float")
+          AnalyzeFMRI::f.write.nifti(data.vol,filename,
+                                     L = D@info$header,nii = FALSE)
+#           AnalyzeFMRI::f.write.analyze(data.vol,filename,size="float")
+          AnalyzeFMRI::f.write.list.to.hdr(L= D@info$header,file=paste(filename,".hdr",sep=""))
+          
       }
       } else {
         warning("Unknown file.type",call. = TRUE)
