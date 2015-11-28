@@ -30,7 +30,8 @@ setClass("neuR.object",
 setGeneric("summary")
 setMethod("summary", "neuR.object", function(object)
 {
-  cat("A neuR-object with volumes of size:",dim(object),"(=",prod(dim(object)),"overall)")
+  cat("
+      A neuR-object with volumes of size:",dim(object),"(=",prod(dim(object)),"overall)")
   cat("
 It contains the following maps:
       ")
