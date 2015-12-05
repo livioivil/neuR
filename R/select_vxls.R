@@ -51,7 +51,7 @@ pixelize <- function(D,reduce.by=2){
     seq(1,dim(D)[2]-reduce.by[2]+1,by=reduce.by[2]),
     seq(1,dim(D)[3]-reduce.by[3]+1,by=reduce.by[3]))
   
-#   tcs=D@data$tcs
+    tcs=D@data$tcs
 #   i2=10
 #   i3=10
 #   i1=10
