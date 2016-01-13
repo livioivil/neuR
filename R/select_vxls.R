@@ -73,9 +73,9 @@ pixelize <- function(D,reduce.by=2){
     out=unlist(out)
   }
 
-  D@data=mclapply (D@data,function(tc){
+  D@data=parallel::mclapply (D@data,function(tc){
     res=mclapply(1:nrow(vertex.coordinates),.get.mean.tcs,xyz0=xyz0,tcs=tc)
-    res=array(unlist(res),c(dim(tcs)[1],prod(new.size),dim(tcs)[3]))
+    res=array(unlist(res),c(dim(tc)[1],prod(new.size),dim(tc)[3]))
   })
   D@info$dim.vol =new.size
   D@info$nvoxels = nrow(vertex.coordinates)

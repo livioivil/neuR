@@ -3,8 +3,8 @@
 #'
 #' @description Computes principal components for each voxel/channel stored in tcs array of slot data of a neuR-object (i.e. D@data$tcs)
 #' @param D a neuR-object
-#' @param center TRUE 
-#' @param scale FALSE
+#' @param center logical, TRUE by default
+#' @param scale logical, FALSE by default
 #' @param max.pc.num 1
 #' @param drop.tcs TRUE
 #' @param selected.volumes NULL or a logical vector of length n (number of volumes per block)

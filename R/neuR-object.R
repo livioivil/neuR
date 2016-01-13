@@ -38,6 +38,7 @@ It contains the following maps:
   if(length(object@data)>0){
     out=t(sapply(object@data,dim))
     colnames(out)=c("Volumes","Voxels","Blocks")
+    cat("\n")
     print(out)
   } else
     cat("No maps!")

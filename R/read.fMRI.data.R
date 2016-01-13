@@ -57,6 +57,7 @@ read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask='constan
     }
   }
   
+  ncharmask=nchar(mask)
   if(is.character(mask)){
     if(mask=='constant'){
       # try to detect automatically: (non-constant)  
@@ -65,7 +66,7 @@ read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask='constan
       } else 
         warning("There is only one volume, mask can not detected for option mask='constant'")
    } else # it is a file name, read it:
-     if(substr(mask,n-2,n)=="nii"){
+     if(substr(mask,ncharmask-2,ncharmask)=="nii"){
        mask=AnalyzeFMRI::f.read.nifti.volume(mask)
      } else{
        mask=AnalyzeFMRI::f.read.analyze.volume(mask)
