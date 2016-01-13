@@ -10,9 +10,9 @@ compute.pcs(D, center = TRUE, scale = FALSE, max.pc.num = 1,
 \arguments{
 \item{D}{a neuR-object}
 
-\item{center}{TRUE}
+\item{center}{logical, TRUE by default}
 
-\item{scale}{FALSE}
+\item{scale}{logical, FALSE by default}
 
 \item{max.pc.num}{1}
 

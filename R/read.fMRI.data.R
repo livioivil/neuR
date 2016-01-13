@@ -56,9 +56,9 @@ read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask='constan
       TT[,,,i]=tt
     }
   }
-  
-  ncharmask=nchar(mask)
+
   if(is.character(mask)){
+    ncharmask=nchar(mask)
     if(mask=='constant'){
       # try to detect automatically: (non-constant)  
       if(nfiles>1) {

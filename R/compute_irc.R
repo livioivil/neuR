@@ -6,7 +6,7 @@
 #' @param pc.num 1  
 #' @param drop.tcs FALSE
 #' @return a 3D array
-#' @export
+#' @export compute.irc
 
 compute.irc <- function(D,pc.num=1,drop.tcs=FALSE){
      out <- .compute.irc

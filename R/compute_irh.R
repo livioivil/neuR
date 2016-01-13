@@ -12,7 +12,7 @@
 #' @param pc.num 1  
 #' @param drop.tcs FALSE
 #' @return a 3D array
-#' @export
+#' @export compute.irh
 
 compute.irh <- function(D,pc.num=1,drop.tcs=FALSE){
   # indice di omogeneità dei k loadings. indice in scala 0-1. 

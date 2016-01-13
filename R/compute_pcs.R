@@ -10,7 +10,7 @@
 #' @param selected.volumes NULL or a logical vector of length n (number of volumes per block)
 #' @param ... other 
 #' @return a neuR-object
-#' @export
+#' @export compute.pcs
 
 
 compute.pcs <- function(D,center=TRUE,scale=FALSE,

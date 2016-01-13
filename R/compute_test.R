@@ -8,7 +8,7 @@
 #' @param offset.values (NULL by default, same effect as 0) A value to be subtracted to each value of the matrix (same dims of left.array)
 #'        It may also be 'meanOverall' or 'meanBySubject' (i.e. average over the second dimension)
 #' @return a list of 3D arrays, usually a T and P one.
-#' @export
+#' @export compute.test
 
 compute.test <- function(D,left.array,right.formula = ~1, offset.values = NULL,
                          tail=1){
