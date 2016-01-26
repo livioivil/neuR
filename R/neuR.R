@@ -8,5 +8,5 @@
 #' @name neuR
 #' @import parallel
 NULL
-options(mc.cores=min(detectCores()-1,30))
+options(mc.cores=min(parallel::detectCores()-1,30))
 #> NULL

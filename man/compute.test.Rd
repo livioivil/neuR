@@ -5,7 +5,7 @@
 \title{Computes Tests in a neuR-object}
 \usage{
 compute.test(D, left.array, right.formula = ~1, offset.values = NULL,
-  tail = 1)
+  tail = 1, drop.tcs = FALSE, avoidNullPvalues = TRUE)
 }
 \arguments{
 \item{D}{a neuR-object}
@@ -16,6 +16,10 @@ compute.test(D, left.array, right.formula = ~1, offset.values = NULL,
 
 \item{offset.values}{(NULL by default, same effect as 0) A value to be subtracted to each value of the matrix (same dims of left.array)
 It may also be 'meanOverall' or 'meanBySubject' (i.e. average over the second dimension)}
+
+\item{drop.tcs}{FALSE}
+
+\item{avoidNullPvalues}{TRUE by default. It substitute 0s with the min(1E-5, minimum value greater than 0 in the vector of p-values)}
 }
 \value{
 a list of 3D arrays, usually a T and P one.

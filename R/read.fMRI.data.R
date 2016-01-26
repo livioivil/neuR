@@ -5,19 +5,23 @@
 #' @param path "."
 #' @param pattern "s.*\\.img"
 #' @param files NULL
-#' @param mask a file name, a array, equal to 'constant' (look for non constant voxels) 
+#' @param mask it can be: a file name, 
+#' a 3D array of appropriate size, 
+#' a string equal to 'constant' (look for non constant voxels) 
 #' or a scalar (values equal to this number are out of the brain) 
 #' @param info NULL
 #' @param silent FALSE
 #' @param exclude.files vector of ids of files to exclude
 #' @param header.file name of the file from which the head should be read. if NULL (default) the head of the first file (not excluded by exclude.files) is used 
+#' @param max.nas.prop.per.voxels (NULL by default, no actions taken) is the maximum proportion of NAs allowed among replications in anny given voxel.
 #' @return a neuR-object
 #' @export
 
 
 read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask='constant',
                           info=NULL,silent=FALSE,exclude.files=c(),
-                          header.file=NULL){
+                          header.file=NULL,
+                          max.nas.prop.per.voxels=NULL){
   
   if(is.null(files))  {
     files=dir(path,pattern=pattern,full.names =TRUE)
@@ -56,7 +60,7 @@ read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask='constan
       TT[,,,i]=tt
     }
   }
-
+  
   if(is.character(mask)){
     ncharmask=nchar(mask)
     if(mask=='constant'){
@@ -77,15 +81,22 @@ read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask='constan
     if(nfiles==1)
       mask=TT!=mask 
     else  
-      mask=(apply(TT,1:3,prod)!=mask)*1
+      mask=(apply(TT!=mask,1:3,all))*1
      }# otherwise it is an array.
   # force mask to have the same dims of dim(TT)[1:3]
   mask=array(as.integer(mask),dim(TT)[-4])
   
-  #the volume has NAs outside the mask, while ids 1:V into the mask
-  mask[mask>0]=1:sum(mask>0)
-  mask[mask==0]=NA
+  if(!any(is.na(mask))){ #in this the mask is a 0,1 matrix therefore:
+    #the volume has NAs outside the mask, while ids 1:V into the mask
+    mask[mask>0]=1:sum(mask>0)
+    mask[mask==0]=NA
+  }
 
+  if(!is.null(max.nas.prop.per.voxels)){
+    nas=apply(is.na(TT),1:3,sum)
+    keep.not.nas=which(nas<=(max.nas.prop.per.voxels*dim(TT)[4]))
+    mask[-keep.not.nas]=NA
+  }
   
   coord.mask=which(!is.na(mask),arr.ind =TRUE)
   tcs=apply(coord.mask,1,function(coord)TT[coord[1],coord[2],coord[3],])

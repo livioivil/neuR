@@ -6,7 +6,7 @@
 \usage{
 read.fMRI.data(path = ".", pattern = "s.*\\\\.img", files = NULL,
   mask = "constant", info = NULL, silent = FALSE, exclude.files = c(),
-  header.file = NULL)
+  header.file = NULL, max.nas.prop.per.voxels = NULL)
 }
 \arguments{
 \item{path}{"."}
@@ -15,7 +15,9 @@ read.fMRI.data(path = ".", pattern = "s.*\\\\.img", files = NULL,
 
 \item{files}{NULL}
 
-\item{mask}{a file name, a array, equal to 'constant' (look for non constant voxels) 
+\item{mask}{it can be: a file name, 
+a 3D array of appropriate size, 
+a string equal to 'constant' (look for non constant voxels) 
 or a scalar (values equal to this number are out of the brain)}
 
 \item{info}{NULL}
@@ -25,6 +27,8 @@ or a scalar (values equal to this number are out of the brain)}
 \item{exclude.files}{vector of ids of files to exclude}
 
 \item{header.file}{name of the file from which the head should be read. if NULL (default) the head of the first file (not excluded by exclude.files) is used}
+
+\item{max.nas.prop.per.voxels}{(NULL by default, no actions taken) is the maximum proportion of NAs allowed among replications in anny given voxel.}
 }
 \value{
 a neuR-object

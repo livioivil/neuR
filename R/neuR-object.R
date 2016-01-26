@@ -3,7 +3,7 @@
 #' @slot data list of 3D arrays
 #' @slot mask 
 #' @slot info 
-#'
+#' @export
 
 
 setClass("neuR.object", 
