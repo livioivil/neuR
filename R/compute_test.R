@@ -53,6 +53,7 @@ compute.test <- function(D,left.array,right.formula = ~1, offset.values = NULL,
   dimnames(sdY)=dimnames(meanY)
   ts= meanY/sdY*array(sqrt(n),c(1,dim(meanY)[2],dim(meanY)[3]))
   n=array(n,dim(meanY)) 
+  dimnames(n)=dimnames(meanY)
   
   if(tail==0){  
     P=2*pt(-abs(ts),df = n-1) 
