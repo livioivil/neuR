@@ -1,0 +1,9 @@
+.cstp_mask<-function(X,names.channels,t){
+  r=dim(X)[1]
+  c=dim(X)[2]
+  Q=matrix(0,nrow=r,ncol=c)
+  time=t
+  pos.channels=which(match(colnames(X),table=names.channels)!="NA")
+  Q[time,pos.channels]=X[time,pos.channels]
+  return(Q)
+}
