@@ -25,10 +25,10 @@ read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask='constan
   
   if(is.null(files))  {
     files=dir(path,pattern=pattern,full.names =TRUE)
+    files=gtools::mixedsort(files)
   } else{
     files=paste(path,files,sep="/")
   }
-  files=gtools::mixedsort(files)
   if(!is.null(exclude.files)&&length(exclude.files)>0)
     files=files[-exclude.files]
   if(!silent) cat("\n reading:",files[1]," ..")
@@ -79,9 +79,16 @@ read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask='constan
   if(length(mask)==1) #is a scalar
     {
     if(nfiles==1)
-      mask=TT!=mask 
-    else  
-      mask=(apply(TT!=mask,1:3,all))*1
+      if(is.na(mask)){
+        mask=array(1,dim(TT)[1:3])
+        mask[is.na(TT)]=0
+      } else mask=TT!=mask 
+    else{
+      if(is.na(mask)){
+        mask=array(1,dim(TT)[1:3])
+        mask=(apply(!is.na(TT),1:3,all))*1
+      } else mask=(apply(TT!=mask,1:3,all))*1
+    }
      }# otherwise it is an array.
   # force mask to have the same dims of dim(TT)[1:3]
   mask=array(as.integer(mask),dim(TT)[-4])

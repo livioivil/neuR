@@ -45,7 +45,7 @@ write.volumes <- function(D,which.maps = NULL,
           f.write.neuR(D4[i,,,,j],paste(file.name,i,sep=""))
         })      )
     } else {
-      sapply(1:nrow(D4), function(i,mask){
+      sapply(rownames(D4), function(i,mask){
         sapply(1:dim(D4)[3], function(j,mask){
           mask[!is.na(mask)]= D4[i,,j]
           mask[is.na(mask)]=0

@@ -22,6 +22,32 @@ setClass("neuR.object",
 )
 
 
+#==========================================================
+# Function "show" prints a "neuR.object" object
+#==========================================================
+setMethod("show", "neuR.object",
+          function(object)
+          {
+            cat("
+                A neuR-object with volumes of size:",dim(object),"(=",prod(dim(object)),"overall)")
+            cat("
+                It contains the following maps:
+                ")
+            if(length(object@data)>0){
+              out=t(sapply(object@data,dim))
+              colnames(out)=c("Volumes","Voxels","Blocks")
+              cat("\n")
+              print(out)
+            } else
+              cat("No maps!")
+            
+            cat("and the following functions:")
+            if(length(object@functs)>0){ 
+              cat(names(object@functs))
+            } else
+              cat("No functions!")
+          }
+          )
 
 #==========================================================
 # Function "summary" prints a "neuR.object" object

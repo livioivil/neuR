@@ -7,6 +7,10 @@
 # .inv.sqrtM2 <- function(X)  sqrt(colSums(X^2))^-1
 
 scale.neuR <- function(X,center=TRUE, scale=FALSE){
+  if(center=="OverAll"){
+    X=X-mean(X)
+    center=FALSE
+  }
   X=scale(X,center=center,scale = FALSE)
   if(scale){
     .sqrtM2 <- function(X)  X/sqrt(mean(X^2))

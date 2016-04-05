@@ -1,6 +1,12 @@
 #creo una paletta colori e la setto come deault
 pal.uno=c("#445577","#ffcc00","#00A08A","#FF0000","#45abff")
 palette(pal.uno)
+####################
+
+.get_volume <- function(D,map){
+  if(is.character(map)) return(D@data[[map]]) else
+    if(is.numeric(map)) return(map)
+}
 
 ##################
 .check.map<- function(obj,map){
@@ -40,13 +46,16 @@ palette(pal.uno)
 ##########
 .fix.names.neuR.data <- function(D3,prefix2ndDim="v",prefix3rdDim="pc"){
   
+
   if(is.list(D3)){
     lapply(D3,.fix.names.neuR.data)
   } else{
+  if(is.null(dimnames(D3)[[1]])) 
+      dimnames(D3)[[1]]=1:nrow(D3)
   if(is.null(dimnames(D3)[[2]])) 
     dimnames(D3)[[2]]=paste(prefix2ndDim,sep="",1:ncol(D3))
   if(is.null(dimnames(D3)[[3]])) 
-  dimnames(D3)[[3]]=paste(prefix3rdDim,sep="",1:dim(D3)[3])
+    if(dim(D3)[3]>1) dimnames(D3)[[3]]=paste(prefix3rdDim,sep="",1:dim(D3)[3]) else dimnames(D3)[[3]] = ""
   }
   D3
 }
