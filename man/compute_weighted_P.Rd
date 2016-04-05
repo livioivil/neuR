@@ -21,6 +21,9 @@ compute_weighted_P(D, Pmap = "test.P", Wmap = "IRC", returnMaps = "P",
 
 \item{return}{can be "Pmap", "Zmap" or c("Pmap","Zmap")}
 }
+\value{
+Maps a named list of array/s
+}
 \description{
 Computes IRC (intra run correlation) of a neuR-object pcs array of slot data of a neuR-object (i.e. D@data$pcs)
 }

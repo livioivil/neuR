@@ -8,7 +8,7 @@
 #' @param tail the sign of the alternative. It can be 0, 1, -1.
 #' @param SignMap (only needed if tail=0) the name of the map that has the sign of the test statistic. "test.T" by default
 #' @param return can be "Pmap", "Zmap" or c("Pmap","Zmap")
-#' @returnMaps a named list of array/s
+#' @return Maps a named list of array/s
 #' @export compute_weighted_P
 
 compute_weighted_P<- function(D,Pmap="test.P",Wmap="IRC",
