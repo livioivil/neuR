@@ -2,15 +2,13 @@
 % Please edit documentation in R/brain_map.R
 \name{brain_map}
 \alias{brain_map}
-\title{Mappa dei canali ai quali
-       ? associato un p-value 
-       statisticamente significativo.}
+\title{brain map of given values}
 \usage{
-brain_map(p.val, labels, main = NULL, coordx = NULL, coordy = NULL,
-  adj = F)
+brain_map(values, labels = NULL, main = NULL, coords = NULL,
+  col = c("white", "red")[(values < 0.05) + 1])
 }
 \arguments{
-\item{p.val}{vector containig p-values that are to be drawn 
+\item{values}{vector containig p-values that are to be drawn 
 relative to channels.
 It has to have the same length of the vector containig
 the coordinates of the channels.
@@ -19,28 +17,18 @@ Deve avere la stessa lunghezza del vettore contenente le
 coordinate in cui plottare i canali.}
 
 \item{labels}{vector containig the names of the channels 
-that are to be drawn
+that are to be drawn. If NULL, it take the labels from names(values)
 vettore contenente i nomi dei canali da plottare.}
 
 \item{main}{the title of the plot. NULL by default
 titolo del plot NULL di default.}
 
-\item{coordx}{vector containing the abscissa of the 
+\item{coords}{matrix of two columns containing the abscissa and the ordinates of the 
 points that are to be drawn. Value's range [-1,1]
 default: channels are drawn at fixed coordinates
 vettore contenente le ascisse dei punti da plottare.
 I valori devono essere compresi tra [-1,1]. Di default 
 i punti sono plottati a coordinate predefinite.}
-
-\item{coordy}{vector containing the ordinates of the 
-points that are to be drawn. Value's range [-1,1]
-default: channels are drawn at fixed coordinates
-vettore contenente le ordinate dei punti da plottare.
-I valori devono essere compresi tra [-1,1]. Di default 
-i punti sono plottati a coordinate predefinite.}
-
-\item{adj}{if TRUE, p-values are corrected with the "Bonferroni" method
-if FALSE, no correction is made.}
 }
 \description{
 Function that realizes a simple map of the head 

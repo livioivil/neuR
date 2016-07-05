@@ -19,9 +19,9 @@
 
 
 read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask='constant',
-                          info=NULL,silent=FALSE,exclude.files=c(),
-                          header.file=NULL,
-                          max.nas.prop.per.voxels=NULL){
+                           info=NULL,silent=FALSE,exclude.files=c(),
+                           header.file=NULL,
+                           max.nas.prop.per.voxels=NULL){
   
   if(is.null(files))  {
     files=dir(path,pattern=pattern,full.names =TRUE)
@@ -36,30 +36,37 @@ read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask='constan
   if(substr(files[1],n-2,n)=="nii"){
     f.read.vol=AnalyzeFMRI::f.read.nifti.volume
     f.read.head=AnalyzeFMRI::f.read.nifti.header
-    } else{
-      f.read.vol=AnalyzeFMRI::f.read.analyze.volume
-      f.read.head=AnalyzeFMRI::f.read.analyze.header
-    }
+  } else{
+    f.read.vol=AnalyzeFMRI::f.read.analyze.volume
+    f.read.head=AnalyzeFMRI::f.read.analyze.header
+  }
   
   tt=f.read.vol(files[1])
   
-  #deals with header
-  if(is.null(header.file)) header.file=files[1]
-  if(is.list(header.file)) {
-    tt.head = header.file
-    header.file = "custom header"
-  } else tt.head=f.read.head(header.file)
-  
-  nfiles=length(files)
-  TT=array(NA,c(dim(tt)[1:3],nfiles))
-  TT[,,,1]=tt
-  if( nfiles >1){
-    for(i in 2:nfiles){
-      if(!silent) cat("\n reading:",files[i]," ..")
-      tt=f.read.vol(files[i])
-      TT[,,,i]=tt
+  if(dim(tt)[4]>1){
+    TT<-tt
+    rm(tt)
+    tt.head=list(dim= dim(TT))
+  } else{
+    #deals with header
+    if(is.null(header.file)) header.file=files[1]
+    if(is.list(header.file)) {
+      tt.head = header.file
+      header.file = "custom header"
+    } else tt.head=f.read.head(header.file)
+    
+    nfiles=length(files)
+    TT=array(NA,c(dim(tt)[1:3],nfiles))
+    TT[,,,1]=tt
+    if( nfiles >1){
+      for(i in 2:nfiles){
+        if(!silent) cat("\n reading:",files[i]," ..")
+        tt=f.read.vol(files[i])
+        TT[,,,i]=tt
+      }
     }
   }
+  
   
   if(is.character(mask)){
     ncharmask=nchar(mask)
@@ -69,22 +76,22 @@ read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask='constan
         mask=apply(TT,1:3,function(x)length(unique(x))>1)*1
       } else 
         warning("There is only one volume, mask can not detected for option mask='constant'")
-   } else # it is a file name, read it:
-     if(substr(mask,ncharmask-2,ncharmask)=="nii"){
-       mask=AnalyzeFMRI::f.read.nifti.volume(mask)
-     } else{
-       mask=AnalyzeFMRI::f.read.analyze.volume(mask)
+    } else # it is a file name, read it:
+      if(substr(mask,ncharmask-2,ncharmask)=="nii"){
+        mask=AnalyzeFMRI::f.read.nifti.volume(mask)
+      } else{
+        mask=AnalyzeFMRI::f.read.analyze.volume(mask)
       }
   } 
   if(length(mask)==1) #is a scalar
-    {
+  {
     if(nfiles==1)
       if(is.na(mask)){
         mask=array(1,dim(TT)[1:3])
         mask[is.na(TT)]=0
       } else mask=TT!=mask 
-    else{
-      if(is.na(mask)){
+      else{
+        if(is.na(mask)){
         mask=array(1,dim(TT)[1:3])
         mask=(apply(!is.na(TT),1:3,all))*1
       } else mask=(apply(TT!=mask,1:3,all))*1
@@ -111,7 +118,9 @@ read.fMRI.data <- function(path=".",pattern="s.*\\.img",files=NULL,mask='constan
   rm(TT,coord.mask)
   
   tcs=array(tcs,c(dim(tcs),1))
-  rownames(tcs)=.cut.file.names(files,15)
+  if(length(files)>1) 
+    rownames(tcs)=.cut.file.names(files,15) else
+      rownames(tcs)=paste("t",1:nrow(tcs),sep="")
   colnames(tcs)=paste("v",sep=".",1:ncol(tcs))
   dimnames(tcs)[3]="tc"
   
