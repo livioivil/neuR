@@ -15,4 +15,3 @@ Number of voxels of an neuR-object, i.e. a scalar
 \description{
 Number of voxels of an neuR-object
 }
-

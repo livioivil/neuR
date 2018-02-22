@@ -9,4 +9,3 @@
 \description{
 same as scale but does not divide
 }
-

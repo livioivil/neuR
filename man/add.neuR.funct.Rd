@@ -19,4 +19,3 @@ a neuR-object
 \description{
 add funct to neuR-object
 }
-

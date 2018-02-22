@@ -27,4 +27,3 @@ a list of 3D arrays, usually a T and P one.
 \description{
 Computes tests of a neuR-object pcs array of slot data of a neuR-object (i.e. D@data$pcs)
 }
-

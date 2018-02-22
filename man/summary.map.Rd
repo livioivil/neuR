@@ -17,4 +17,3 @@ a table of summary stats for each volume
 \description{
 summary of all maps
 }
-

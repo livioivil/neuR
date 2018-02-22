@@ -28,4 +28,3 @@ a neuR-object
 \description{
 Computes principal components for each voxel/channel stored in tcs array of slot data of a neuR-object (i.e. D@data$tcs)
 }
-

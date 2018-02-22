@@ -48,12 +48,13 @@ extract_tc<-function(xyz,tcs,mask){
 #' @description reduce a neuR-object 
 #' @title pixelize
 #' @param D a neuR-object
-#' @param reduce.by (integer) resizing factor. 
+#' @param reduce.by (integer or vector) resizing factor.
+#' @param summary_function by default: \code{rowMeans} 
 #' If it is a vector, the tree coordinates indicate the 
 #' rescaling to bi applied to each dimension. 
 #' If it is a scalar, the same rescaling is applied to the 3 dims.
 #' @export 
-pixelize <- function(D,reduce.by=2){
+pixelize <- function(D,reduce.by=2,summary_function=rowMeans){
   reduce.by=rep(reduce.by,length.out=3)
   new.size=dim(D)%/%reduce.by
   vertex.coordinates=expand.grid(
@@ -79,7 +80,7 @@ pixelize <- function(D,reduce.by=2){
     #extract
     tcs=extract_tc(xyz,tcs=tcs,mask=D@mask)
     out=mclapply(1:dim(tcs)[3],function(i)
-                 rowMeans(tcs[,,i],na.rm = na.rm))
+                 summary_function(tcs[,,i,drop=FALSE],na.rm = na.rm))
     out=unlist(out)
   }
 
@@ -87,6 +88,7 @@ pixelize <- function(D,reduce.by=2){
     res=mclapply(1:nrow(vertex.coordinates),.get.mean.tcs,xyz0=xyz0,tcs=tc)
     res=array(unlist(res),c(dim(tc)[1],prod(new.size),dim(tc)[3]))
   })
+  
   D@info$dim.vol =new.size
   D@info$nvoxels = nrow(vertex.coordinates)
   D@info$dimnames[[2]]=rownames(vertex.coordinates)

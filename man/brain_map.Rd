@@ -5,7 +5,7 @@
 \title{brain map of given values}
 \usage{
 brain_map(values, labels = NULL, main = NULL, coords = NULL,
-  col = c("white", "red")[(values < 0.05) + 1])
+  col = c("white", "red")[(values < 0.05) + 1], ...)
 }
 \arguments{
 \item{values}{vector containig p-values that are to be drawn 
@@ -29,6 +29,8 @@ default: channels are drawn at fixed coordinates
 vettore contenente le ascisse dei punti da plottare.
 I valori devono essere compresi tra [-1,1]. Di default 
 i punti sono plottati a coordinate predefinite.}
+
+\item{...}{any other parameter affecting \code{plot}.}
 }
 \description{
 Function that realizes a simple map of the head 
@@ -40,4 +42,3 @@ Function that realizes a simple map of the head
 \author{
 Michelle Viola
 }
-

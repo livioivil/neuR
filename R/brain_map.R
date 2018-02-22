@@ -24,10 +24,11 @@
 #'               vettore contenente le ascisse dei punti da plottare.
 #'               I valori devono essere compresi tra [-1,1]. Di default 
 #'               i punti sono plottati a coordinate predefinite.
+#' @param ... any other parameter affecting \code{plot}.
 #' @author Michelle Viola
 #' @export brain_map
 
-brain_map<-function(values,labels=NULL,main=NULL,coords=NULL,col=c("white","red")[(values<.05)+1]){
+brain_map<-function(values,labels=NULL,main=NULL,coords=NULL,col=c("white","red")[(values<.05)+1],...){
   if(is.null(coords)){
     coords=cbind(x=c(-0.5,-0.2,-0.3,-0.65,-0.75,-0.3,-0.5,-0.2,-0.75,-0.65,0.5,0.2,0.3,0.65,0.75,0.3,0.5,0.2,0.75,0.65),
                  y=c(0.7,0.45,0.1,0.1,0.45,-0.1,-0.7,-0.45,-0.45,-0.1,0.7,0.45,0.1,0.1,0.45,-0.1,-0.7,-0.45,-0.45,-0.1)
@@ -42,17 +43,17 @@ brain_map<-function(values,labels=NULL,main=NULL,coords=NULL,col=c("white","red"
   x=seq(from=0,to=2*pi,by=0.01)
   y=seq(from=0,to=2*pi,by=0.01)
 
-  plot(cos(x),sin(y),type="l",asp=1,xlab=" ",ylab=" ",axes=F,main=main)
+  plot(cos(x),sin(y),type="l",asp=1,xlab=" ",ylab=" ",axes=F,main=main,...)
   space=cbind(coords,values)
     #naso
     points(0,1,pch=2,cex=2)
-    text(-1.2,0,labels="Left",adj=0,cex=1)
-    text(1.05,0,labels="Right",adj=0,cex=1)
-    text(0,0.7,labels="Ant",adj=0,cex=1)
-    text(0,-0.7,labels="Post",adj=0,cex=1)
+    text(-1.2,0,labels="Left",adj=0,cex=1,col="darkgrey")
+    text(1.05,0,labels="Right",adj=0,cex=1,col="darkgrey")
+    text(-.05,0.7,labels="Ant",adj=0,cex=1,col="darkgrey")
+    text(-.05,-0.7,labels="Post",adj=0,cex=1,col="darkgrey")
     
     
-    if(col=="heat.colors") {
+    if(any(col=="heat.colors")) {
       palette(heat.colors(32))
       col=ceiling((values-min(values)*.9999)/(max(values)-min(values)*.9999)*32)
     }
@@ -60,7 +61,7 @@ brain_map<-function(values,labels=NULL,main=NULL,coords=NULL,col=c("white","red"
     text(space[,1],space[,2],labels,adj=0,pos=4,cex=1)
   
     # if(adj==T){
-    #   legend(c(0.2,1),legend=c("adj.p-val<0.05","adj.p-val>0.05"),bty="n",pch=c(rep(21,2)),pt.bg=c("red","white"),pt.cex=2,cex=0.8,y.inters=0.8)
+      # legend("topright",legend=c("Signif (alpha=0.05)","Not Signif"),bty="n",pch=c(rep(21,2)),pt.bg=c("red","white"),pt.cex=2,cex=0.8,y.inters=0.8)
     # }else{
     #   legend(c(0.2,1),legend=c("p-val<0.05","p-val>0.05"),bty="n",pch=c(rep(21,2)),pt.bg=c("red","white"),pt.cex=2,cex=0.8,y.inters=0.8)
     # }

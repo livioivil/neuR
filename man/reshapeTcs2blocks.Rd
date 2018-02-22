@@ -17,4 +17,3 @@ a neuR-object
 \description{
 Reshapes D@data$tcs in a 3D (time X voxel/channel X block)
 }
-

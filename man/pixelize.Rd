@@ -4,12 +4,14 @@
 \alias{pixelize}
 \title{pixelize}
 \usage{
-pixelize(D, reduce.by = 2)
+pixelize(D, reduce.by = 2, summary_function = rowMeans)
 }
 \arguments{
 \item{D}{a neuR-object}
 
-\item{reduce.by}{(integer) resizing factor. 
+\item{reduce.by}{(integer or vector) resizing factor.}
+
+\item{summary_function}{by default: \code{rowMeans} 
 If it is a vector, the tree coordinates indicate the 
 rescaling to bi applied to each dimension. 
 If it is a scalar, the same rescaling is applied to the 3 dims.}
@@ -17,4 +19,3 @@ If it is a scalar, the same rescaling is applied to the 3 dims.}
 \description{
 reduce a neuR-object
 }
-

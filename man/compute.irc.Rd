@@ -19,4 +19,3 @@ a 3D array
 \description{
 Computes IRC (intra run correlation) of a neuR-object pcs array of slot data of a neuR-object (i.e. D@data$pcs)
 }
-

@@ -17,4 +17,3 @@ a vector of dims: n replicates X nvoxels X n dimensions
 \description{
 dim of a given map
 }
-

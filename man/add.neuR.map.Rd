@@ -20,4 +20,3 @@ a neuR-object
 \description{
 add volume to neuR-object
 }
-

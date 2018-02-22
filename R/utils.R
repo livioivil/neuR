@@ -45,8 +45,7 @@ palette(pal.uno)
 
 ##########
 .fix.names.neuR.data <- function(D3,prefix2ndDim="v",prefix3rdDim="pc"){
-  
-
+  if(is.null(dimnames(D3))) dimnames(D3)[[1]]=list()
   if(is.list(D3)){
     lapply(D3,.fix.names.neuR.data)
   } else{

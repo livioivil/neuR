@@ -36,4 +36,3 @@ a neuR-object
 \description{
 Reads .nii and .img/.hdr file data and save to neuR-object
 }
-

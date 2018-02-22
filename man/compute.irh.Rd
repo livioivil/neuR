@@ -25,4 +25,3 @@ l'indice è pari a media(loadings)^2*k.
 se 1 tutti i loading sono uguali tra loro (e pari a 1/sqrt(k))
 se 0, i loadings hanno media 0 e la varianza vale 1/k
 }
-

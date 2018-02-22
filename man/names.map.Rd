@@ -15,4 +15,3 @@ a list of dimnames
 \description{
 dimnames of the maps
 }
-

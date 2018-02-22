@@ -21,4 +21,3 @@ write.volumes(D, which.maps = NULL, file.root.name = "V",
 \description{
 writes  .nii and .img/.hdr file file from a neuR-object. occhio agli header, per ora file.type pari al formato della immagine che ha generato l'header.
 }
-

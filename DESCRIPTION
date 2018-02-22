@@ -10,4 +10,4 @@ Maintainer: livio finos <livio.finos@unipd.it>
 Description: R package for data processing and statistical analysis of
     neuroscience
 License: GPL (>= 2)
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
